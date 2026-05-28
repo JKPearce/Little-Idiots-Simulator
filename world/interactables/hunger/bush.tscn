@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dql2uwose0qlk"]
+
+[ext_resource type="Script" uid="uid://b05uxo8xnkmou" path="res://world/interactables/hunger/bush.gd" id="1_28u5p"]
+[ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_ilexf"]
+
+[sub_resource type="Animation" id="Animation_oelii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bvuwm"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_xw17e"]
+resource_name = "grow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgn1b"]
+_data = {
+&"RESET": SubResource("Animation_oelii"),
+&"despawn": SubResource("Animation_bvuwm"),
+&"grow": SubResource("Animation_xw17e")
+}
+
+[node name="Bush" type="Node2D" unique_id=891918958 groups=["food"]]
+script = ExtResource("1_28u5p")
+target_group = "hunger"
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=10166365]
+modulate = Color(0.08529731, 0.5098177, 0.19188786, 1)
+texture = ExtResource("2_ilexf")
+
+[node name="Label" type="Label" parent="." unique_id=1574165131]
+offset_left = -17.0
+offset_top = 27.0
+offset_right = 23.0
+offset_bottom = 50.0
+text = "Bush"
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=946366055]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_mgn1b")
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=798107380]
+unique_name_in_owner = true
+wait_time = 5.0
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

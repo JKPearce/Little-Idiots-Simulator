@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bnv5pr5h4miei"]
+
+[ext_resource type="Script" uid="uid://b645iqa86lhdi" path="res://world/interactables/energy/bed.gd" id="1_c32mu"]
+[ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_2rykw"]
+
+[node name="Bed" type="Node2D" unique_id=1288856914 groups=["energy"]]
+script = ExtResource("1_c32mu")
+target_group = "energy"
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=202492710]
+modulate = Color(0.35623822, 0.17648593, 0, 1)
+texture = ExtResource("2_2rykw")
+
+[node name="Label" type="Label" parent="." unique_id=914568667]
+offset_left = -18.0
+offset_top = 28.0
+offset_right = 22.0
+offset_bottom = 51.0
+text = "Bed"

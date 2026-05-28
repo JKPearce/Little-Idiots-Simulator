@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://d1wxee1h5fkm3"]
+
+[ext_resource type="Texture2D" uid="uid://ctmdnsowshm1x" path="res://entity/sprites/entity.png" id="1_6e8rh"]
+[ext_resource type="Script" uid="uid://cnw0oah71tctk" path="res://entity/entity.gd" id="1_uqc13"]
+[ext_resource type="Script" uid="uid://b5iyb2jppyvhq" path="res://entity/ai/state_machine/state_machine.gd" id="3_glcaf"]
+[ext_resource type="Script" uid="uid://chk346kquk7hb" path="res://entity/ai/state_machine/states/idle.gd" id="4_jspmv"]
+[ext_resource type="PackedScene" uid="uid://b8wvlh4std50g" path="res://entity/debug_overlay.tscn" id="5_jspmv"]
+[ext_resource type="Script" uid="uid://cu6j7ckdfdcqi" path="res://entity/ai/state_machine/states/do_action.gd" id="5_s1kue"]
+[ext_resource type="Script" uid="uid://yjfvpd1y8evc" path="res://entity/ai/utility/utility_ai_brain.gd" id="7_ec552"]
+[ext_resource type="Script" uid="uid://dqvjl2k1slnfu" path="res://entity/ai/utility/utility_ai_action.gd" id="8_whxwk"]
+[ext_resource type="Script" uid="uid://cbdmtp5mor0ud" path="res://entity/ai/utility/considerations/hunger_consideration.gd" id="9_g2k83"]
+[ext_resource type="Script" uid="uid://cslegcksrqln2" path="res://entity/ai/utility/considerations/distance_to_closest_node_consideration.gd" id="11_f6k7f"]
+[ext_resource type="Script" uid="uid://d1gs7m5pr27pm" path="res://entity/ai/utility/considerations/idle_consideration.gd" id="12_f6k7f"]
+[ext_resource type="Script" uid="uid://c0eubyctdiemc" path="res://entity/ai/utility/considerations/node_available_consideration.gd" id="12_psl4n"]
+[ext_resource type="Script" uid="uid://cw3oscjihnmub" path="res://entity/ai/utility/considerations/energy_consideration.gd" id="12_qs5px"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uqc13"]
+radius = 24.0
+
+[sub_resource type="Curve" id="Curve_pkawc"]
+_data = [Vector2(0.0046729, 0), 0.0, 0.0, 0, 0, Vector2(0.34579438, 0), 0.0, 0.0, 0, 0, Vector2(0.65420556, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_f6k7f"]
+_data = [Vector2(0.24766356, 0.30337083), 0.0, 0.13115422, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qs5px"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k6a8k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2990654, 1), 0.0, 0.0, 0, 0, Vector2(0.79906535, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_psl4n"]
+_data = [Vector2(0, 0.30337083), 0.0, 0.0, 0, 0, Vector2(1, 0.30337083), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Entity" type="CharacterBody2D" unique_id=1437914156]
+script = ExtResource("1_uqc13")
+
+[node name="EntitySprite" type="Sprite2D" parent="." unique_id=1125844034]
+unique_name_in_owner = true
+texture = ExtResource("1_6e8rh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=952982934]
+shape = SubResource("CircleShape2D_uqc13")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1486742620 node_paths=PackedStringArray("default_state")]
+unique_name_in_owner = true
+script = ExtResource("3_glcaf")
+default_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1011439436 node_paths=PackedStringArray("entity")]
+script = ExtResource("4_jspmv")
+entity = NodePath("../..")
+
+[node name="DoAction" type="Node" parent="StateMachine" unique_id=1915202780 node_paths=PackedStringArray("entity")]
+script = ExtResource("5_s1kue")
+entity = NodePath("../..")
+
+[node name="DebugOverlay" parent="." unique_id=552176177 node_paths=PackedStringArray("entity", "utility_brain") instance=ExtResource("5_jspmv")]
+offset_left = -25.0
+offset_top = 32.0
+offset_right = -25.0
+offset_bottom = 32.0
+entity = NodePath("..")
+utility_brain = NodePath("../UtilityAiBrain")
+
+[node name="UtilityAiBrain" type="Node" parent="." unique_id=1090293119]
+unique_name_in_owner = true
+script = ExtResource("7_ec552")
+
+[node name="eat" type="Node" parent="UtilityAiBrain" unique_id=2016616836]
+script = ExtResource("8_whxwk")
+
+[node name="HungerConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1061801637 node_paths=PackedStringArray("entity")]
+script = ExtResource("9_g2k83")
+entity = NodePath("../../..")
+curve = SubResource("Curve_pkawc")
+
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1150541048 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_f6k7f")
+target_group = "hunger"
+entity = NodePath("../../..")
+curve = SubResource("Curve_f6k7f")
+
+[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1085826760 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_psl4n")
+target_group = "hunger"
+entity = NodePath("../../..")
+curve = SubResource("Curve_qs5px")
+
+[node name="sleep" type="Node" parent="UtilityAiBrain" unique_id=1027185326]
+script = ExtResource("8_whxwk")
+
+[node name="EnergyConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=1055821472 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_qs5px")
+entity = NodePath("../../..")
+curve = SubResource("Curve_k6a8k")
+
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=187680760 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_f6k7f")
+target_group = "energy"
+entity = NodePath("../../..")
+curve = SubResource("Curve_f6k7f")
+
+[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=757720551 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_psl4n")
+target_group = "energy"
+entity = NodePath("../../..")
+curve = SubResource("Curve_qs5px")
+
+[node name="idle" type="Node" parent="UtilityAiBrain" unique_id=548316253]
+script = ExtResource("8_whxwk")
+
+[node name="IdleConsideration" type="Node" parent="UtilityAiBrain/idle" unique_id=1369643521 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_f6k7f")
+entity = NodePath("../../..")
+requires_entity = false
+curve = SubResource("Curve_psl4n")

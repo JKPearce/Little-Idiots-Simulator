@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dtb83abm68myj"]
+
+[ext_resource type="PackedScene" uid="uid://d1wxee1h5fkm3" path="res://entity/entity.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bnv5pr5h4miei" path="res://world/interactables/energy/bed.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dql2uwose0qlk" path="res://world/interactables/hunger/bush.tscn" id="3_1bvp3"]
+
+[node name="Main" type="Node2D" unique_id=2144949237]
+
+[node name="Entity" parent="." unique_id=407769977 instance=ExtResource("1_ig7tw")]
+position = Vector2(220, 295)
+
+[node name="Entity2" parent="." unique_id=1437914156 instance=ExtResource("1_ig7tw")]
+position = Vector2(453, 570)
+hunger_decay_rate = 0.05
+
+[node name="Entity3" parent="." unique_id=2112537551 instance=ExtResource("1_ig7tw")]
+position = Vector2(932, 484)
+hunger_decay_rate = 0.05
+energy_decay_rate = 0.05
+
+[node name="Entity4" parent="." unique_id=187959413 instance=ExtResource("1_ig7tw")]
+position = Vector2(824, 241)
+hunger_decay_rate = 0.01
+energy_decay_rate = 0.1
+
+[node name="World" type="Node2D" parent="." unique_id=1484823229]
+unique_name_in_owner = true
+
+[node name="Bed" parent="World" unique_id=1288856914 instance=ExtResource("2_h2yge")]
+position = Vector2(1002, 89)
+quality = 0.8
+
+[node name="Bed2" parent="World" unique_id=532419798 instance=ExtResource("2_h2yge")]
+position = Vector2(535, 439)
+quality = 0.2
+
+[node name="Bed3" parent="World" unique_id=325263823 instance=ExtResource("2_h2yge")]
+position = Vector2(233, 114)
+quality = 0.6
+
+[node name="Bush" parent="World" unique_id=891918958 instance=ExtResource("3_1bvp3")]
+position = Vector2(518, 129)
+quality = null
+can_be_used = null
+
+[node name="Bush2" parent="World" unique_id=1268340270 instance=ExtResource("3_1bvp3")]
+position = Vector2(759, 347)
+quality = 0.5
+can_be_used = null
+
+[node name="Bush3" parent="World" unique_id=60905528 instance=ExtResource("3_1bvp3")]
+position = Vector2(267, 483)
+quality = 0.8
+can_be_used = null
