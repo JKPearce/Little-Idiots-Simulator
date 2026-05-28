@@ -37,12 +37,11 @@ func _on_top_action_changed(action_id: String) -> void:
 
 	match action_id:
 		"eat":
-			target = WorldState.get_closest_available_target("hunger", global_position, self)
+			target = WorldState.get_closest_available_target("storage", global_position, self)
 			if target == null:
 				current_action = "idle"
 				perform_action()
 				return
-			target.reserve(self)
 			current_action = action_id
 			perform_action()
 
@@ -55,6 +54,17 @@ func _on_top_action_changed(action_id: String) -> void:
 			target.reserve(self)
 			current_action = action_id
 			perform_action()
+		
+		"gather_food":
+			target = WorldState.get_closest_available_target("hunger", global_position, self)
+			if target == null:
+				current_action = "idle"
+				perform_action()
+				return
+			target.reserve(self)
+			current_action = action_id
+			perform_action()
+
 
 		"idle":
 			if target:

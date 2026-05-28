@@ -1,22 +1,23 @@
 extends Interactable
 class_name Bush
 
+@export var respawn_time: = 1.0
 
 func interact(entity: Entity) -> void:
-	print(entity, " is interacting with Bush")
-	entity.needs[Entity.NEED.HUNGER] = clampf(
-		entity.needs[Entity.NEED.HUNGER] - quality,
-		0.0,
-		1.0
-	)
-	
+	if not useable:
+		return
+
+	print(entity, " is gathering food from Bush")
+
+	WorldState.storage["food"] += 1
+
 	useable = false
 	start_respawn()
 
 
 func start_respawn() -> void:
 	%AnimationPlayer.play("despawn")
-	await %RespawnTimer.timeout
+	%RespawnTimer.start(respawn_time)
 
 
 

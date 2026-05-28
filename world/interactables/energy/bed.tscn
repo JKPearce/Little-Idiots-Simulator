@@ -6,6 +6,7 @@
 [node name="Bed" type="Node2D" unique_id=1288856914 groups=["energy"]]
 script = ExtResource("1_c32mu")
 target_group = "energy"
+quality = 0.8
 
 [node name="Circle" type="Sprite2D" parent="." unique_id=202492710]
 modulate = Color(0.35623822, 0.17648593, 0, 1)

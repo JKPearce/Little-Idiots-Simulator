@@ -9,10 +9,13 @@
 [ext_resource type="Script" uid="uid://yjfvpd1y8evc" path="res://entity/ai/utility/utility_ai_brain.gd" id="7_ec552"]
 [ext_resource type="Script" uid="uid://dqvjl2k1slnfu" path="res://entity/ai/utility/utility_ai_action.gd" id="8_whxwk"]
 [ext_resource type="Script" uid="uid://cbdmtp5mor0ud" path="res://entity/ai/utility/considerations/hunger_consideration.gd" id="9_g2k83"]
+[ext_resource type="Script" uid="uid://b3d6ka2y5jolq" path="res://entity/ai/utility/utility_ai_aggregration.gd" id="10_wrmdn"]
 [ext_resource type="Script" uid="uid://cslegcksrqln2" path="res://entity/ai/utility/considerations/distance_to_closest_node_consideration.gd" id="11_f6k7f"]
 [ext_resource type="Script" uid="uid://d1gs7m5pr27pm" path="res://entity/ai/utility/considerations/idle_consideration.gd" id="12_f6k7f"]
+[ext_resource type="Script" uid="uid://cow05xj0frosc" path="res://entity/ai/utility/considerations/storage_has_item_consideration.gd" id="12_pkawc"]
 [ext_resource type="Script" uid="uid://c0eubyctdiemc" path="res://entity/ai/utility/considerations/node_available_consideration.gd" id="12_psl4n"]
 [ext_resource type="Script" uid="uid://cw3oscjihnmub" path="res://entity/ai/utility/considerations/energy_consideration.gd" id="12_qs5px"]
+[ext_resource type="Script" uid="uid://oiksqf1xsn5q" path="res://entity/ai/utility/considerations/storage_shortage_consideration.gd" id="15_k6a8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uqc13"]
 radius = 24.0
@@ -34,7 +37,11 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2990654, 1), 0.0, 0.0, 0, 0, V
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_psl4n"]
-_data = [Vector2(0, 0.30337083), 0.0, 0.0, 0, 0, Vector2(1, 0.30337083), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.10112369), 0.0, 0.0, 0, 0, Vector2(1, 0.10112369), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ll4h2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Entity" type="CharacterBody2D" unique_id=1437914156]
@@ -75,41 +82,47 @@ script = ExtResource("7_ec552")
 [node name="eat" type="Node" parent="UtilityAiBrain" unique_id=2016616836]
 script = ExtResource("8_whxwk")
 
-[node name="HungerConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1061801637 node_paths=PackedStringArray("entity")]
+[node name="Aggregation" type="Node" parent="UtilityAiBrain/eat" unique_id=1984472539]
+script = ExtResource("10_wrmdn")
+
+[node name="HungerConsideration" type="Node" parent="UtilityAiBrain/eat/Aggregation" unique_id=1061801637 node_paths=PackedStringArray("entity")]
 script = ExtResource("9_g2k83")
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 curve = SubResource("Curve_pkawc")
 
-[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1150541048 node_paths=PackedStringArray("entity")]
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/eat/Aggregation" unique_id=1150541048 node_paths=PackedStringArray("entity")]
 script = ExtResource("11_f6k7f")
 target_group = "hunger"
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 curve = SubResource("Curve_f6k7f")
 
-[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/eat" unique_id=1085826760 node_paths=PackedStringArray("entity")]
-script = ExtResource("12_psl4n")
-target_group = "hunger"
-entity = NodePath("../../..")
+[node name="StorageHasItemConsideration" type="Node" parent="UtilityAiBrain/eat/Aggregation" unique_id=1085826760]
+script = ExtResource("12_pkawc")
+storage_key = "food"
+requires_entity = false
 curve = SubResource("Curve_qs5px")
 
 [node name="sleep" type="Node" parent="UtilityAiBrain" unique_id=1027185326]
 script = ExtResource("8_whxwk")
 
-[node name="EnergyConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=1055821472 node_paths=PackedStringArray("entity")]
+[node name="Aggregation" type="Node" parent="UtilityAiBrain/sleep" unique_id=1641334464]
+script = ExtResource("10_wrmdn")
+
+[node name="EnergyConsideration" type="Node" parent="UtilityAiBrain/sleep/Aggregation" unique_id=1055821472 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_qs5px")
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 curve = SubResource("Curve_k6a8k")
 
-[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=187680760 node_paths=PackedStringArray("entity")]
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/sleep/Aggregation" unique_id=187680760 node_paths=PackedStringArray("entity")]
 script = ExtResource("11_f6k7f")
 target_group = "energy"
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 curve = SubResource("Curve_f6k7f")
 
-[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/sleep" unique_id=757720551 node_paths=PackedStringArray("entity")]
+[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/sleep/Aggregation" unique_id=757720551 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
 target_group = "energy"
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 curve = SubResource("Curve_qs5px")
 
 [node name="idle" type="Node" parent="UtilityAiBrain" unique_id=548316253]
@@ -120,3 +133,27 @@ script = ExtResource("12_f6k7f")
 entity = NodePath("../../..")
 requires_entity = false
 curve = SubResource("Curve_psl4n")
+
+[node name="gather_food" type="Node" parent="UtilityAiBrain" unique_id=538552701]
+script = ExtResource("8_whxwk")
+
+[node name="Aggregation" type="Node" parent="UtilityAiBrain/gather_food" unique_id=1679430624]
+script = ExtResource("10_wrmdn")
+
+[node name="StorageShortageConsideration" type="Node" parent="UtilityAiBrain/gather_food/Aggregation" unique_id=1966260204]
+script = ExtResource("15_k6a8k")
+storage_key = "food"
+requires_entity = false
+curve = SubResource("Curve_ll4h2")
+
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/gather_food/Aggregation" unique_id=983239606 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_f6k7f")
+target_group = "hunger"
+entity = NodePath("../../../..")
+curve = SubResource("Curve_f6k7f")
+
+[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_food/Aggregation" unique_id=1212233959 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_psl4n")
+target_group = "hunger"
+entity = NodePath("../../../..")
+curve = SubResource("Curve_qs5px")
