@@ -16,10 +16,12 @@ func tick(entity: Entity, delta: float) -> bool:
 
 	if distance <= target.interaction_distance:
 		entity.velocity = Vector2.ZERO
+		entity.visuals.play_idle()
 		return true
 
 	var direction := to.normalized()
-	entity.entity_sprite.rotation = direction.angle()
+
+	entity.visuals.play_move(direction)
 	entity.velocity = direction * entity.speed
 	entity.move_and_slide()
 

@@ -11,5 +11,6 @@ func tick(entity: Entity, delta: float) -> bool:
 	if target == null or not is_instance_valid(target):
 		return true
 
+	entity.visuals.play_interact(target)
 	target.interact(entity)
 	return true

@@ -2,9 +2,9 @@ extends CharacterBody2D
 class_name Entity
 
 @onready var state_machine: StateMachine = %StateMachine
-@onready var entity_sprite: Sprite2D = %EntitySprite
 @onready var brain: UtilityAiBrain = %UtilityAiBrain
 @onready var task_runner: TaskRunner = %TaskRunner
+@onready var visuals: EntityVisuals = $EntityVisuals
 
 
 
@@ -45,6 +45,9 @@ func clear_held_item() -> void:
 
 
 func _ready() -> void:
+	print("Visuals: ", visuals)
+	print("Visuals sprite: ", visuals.sprite if visuals else null)
+	print("Visuals anim: ", visuals.animation_player if visuals else null)
 	brain.top_action_changed.connect(_on_top_action_changed)
 
 #make it work, make it ugly - this functions mantra lol

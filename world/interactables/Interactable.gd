@@ -4,6 +4,7 @@ class_name Interactable
 @export var target_group := ""
 @export_range(0.0, 1.0) var quality := 0.25
 @export var useable:= true
+@export var interaction_animation := ""
 
 var reserved_by: Entity = null
 @export var requires_reservation := true
