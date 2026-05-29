@@ -1,28 +1,26 @@
+# MoveToTask.gd
 extends BaseTask
 class_name MoveToTask
 
-var target_position: Vector2
-var arrive_distance := 4.0
+var target: Interactable
 
+func _init(target_node: Interactable) -> void:
+	target = target_node
 
-func _init(pos: Vector2) -> void:
-	target_position = pos
+func tick(entity: Entity, delta: float) -> bool:
+	if target == null or not is_instance_valid(target):
+		return true
 
-
-func tick(entity: Entity, _delta: float) -> TaskStatus:
-	var to := target_position - entity.global_position
+	var to := target.global_position - entity.global_position
 	var distance := to.length()
 
-	# arrived
-	if distance <= arrive_distance:
+	if distance <= target.interaction_distance:
 		entity.velocity = Vector2.ZERO
-		return TaskStatus.SUCCESS
+		return true
 
-	# move
 	var direction := to.normalized()
-
-	entity.rotation = direction.angle()
+	entity.entity_sprite.rotation = direction.angle()
 	entity.velocity = direction * entity.speed
 	entity.move_and_slide()
 
-	return TaskStatus.RUNNING
+	return false

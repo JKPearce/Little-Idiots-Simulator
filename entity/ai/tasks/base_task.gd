@@ -1,13 +1,14 @@
-extends RefCounted
+# BaseTask.gd
 class_name BaseTask
+extends RefCounted
 
+var started := false
 
-enum TaskStatus {
-	RUNNING,
-	SUCCESS,
-	FAILED
-}
+func start(entity: Entity) -> void:
+	started = true
 
+func tick(entity: Entity, delta: float) -> bool:
+	return true
 
-func tick(_entity: Entity, _delta: float) -> TaskStatus:
-	return TaskStatus.SUCCESS
+func finish(entity: Entity) -> void:
+	pass

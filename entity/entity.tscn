@@ -3,10 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://ctmdnsowshm1x" path="res://entity/sprites/entity.png" id="1_6e8rh"]
 [ext_resource type="Script" uid="uid://cnw0oah71tctk" path="res://entity/entity.gd" id="1_uqc13"]
 [ext_resource type="Script" uid="uid://b5iyb2jppyvhq" path="res://entity/ai/state_machine/state_machine.gd" id="3_glcaf"]
+[ext_resource type="Script" uid="uid://tty6pi5q62pb" path="res://entity/ai/tasks/task_runner.gd" id="3_ll4h2"]
 [ext_resource type="Script" uid="uid://chk346kquk7hb" path="res://entity/ai/state_machine/states/idle.gd" id="4_jspmv"]
 [ext_resource type="PackedScene" uid="uid://b8wvlh4std50g" path="res://entity/debug/debug_overlay.tscn" id="5_jspmv"]
-[ext_resource type="Script" uid="uid://cu6j7ckdfdcqi" path="res://entity/ai/state_machine/states/do_action.gd" id="5_s1kue"]
 [ext_resource type="Script" uid="uid://yjfvpd1y8evc" path="res://entity/ai/utility/utility_ai_brain.gd" id="7_ec552"]
+[ext_resource type="Script" uid="uid://ccj1b7grxc7kg" path="res://entity/ai/state_machine/states/execute_task_sequence.gd" id="7_lkwko"]
 [ext_resource type="Script" uid="uid://dqvjl2k1slnfu" path="res://entity/ai/utility/utility_ai_action.gd" id="8_whxwk"]
 [ext_resource type="Script" uid="uid://cbdmtp5mor0ud" path="res://entity/ai/utility/considerations/hunger_consideration.gd" id="9_g2k83"]
 [ext_resource type="Script" uid="uid://b3d6ka2y5jolq" path="res://entity/ai/utility/utility_ai_aggregration.gd" id="10_wrmdn"]
@@ -47,6 +48,14 @@ point_count = 2
 [node name="Entity" type="CharacterBody2D" unique_id=1437914156]
 script = ExtResource("1_uqc13")
 
+[node name="DebugOverlay" parent="." unique_id=552176177 node_paths=PackedStringArray("entity", "utility_brain") instance=ExtResource("5_jspmv")]
+offset_left = -25.0
+offset_top = 32.0
+offset_right = -25.0
+offset_bottom = 32.0
+entity = NodePath("..")
+utility_brain = NodePath("../UtilityAiBrain")
+
 [node name="EntitySprite" type="Sprite2D" parent="." unique_id=1125844034]
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
@@ -54,6 +63,10 @@ texture = ExtResource("1_6e8rh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=952982934]
 shape = SubResource("CircleShape2D_uqc13")
+
+[node name="TaskRunner" type="Node" parent="." unique_id=754794085]
+unique_name_in_owner = true
+script = ExtResource("3_ll4h2")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1486742620 node_paths=PackedStringArray("default_state")]
 unique_name_in_owner = true
@@ -64,17 +77,9 @@ default_state = NodePath("Idle")
 script = ExtResource("4_jspmv")
 entity = NodePath("../..")
 
-[node name="DoAction" type="Node" parent="StateMachine" unique_id=1915202780 node_paths=PackedStringArray("entity")]
-script = ExtResource("5_s1kue")
+[node name="ExecuteTaskSequence" type="Node" parent="StateMachine" unique_id=1901041736 node_paths=PackedStringArray("entity")]
+script = ExtResource("7_lkwko")
 entity = NodePath("../..")
-
-[node name="DebugOverlay" parent="." unique_id=552176177 node_paths=PackedStringArray("entity", "utility_brain") instance=ExtResource("5_jspmv")]
-offset_left = -25.0
-offset_top = 32.0
-offset_right = -25.0
-offset_bottom = 32.0
-entity = NodePath("..")
-utility_brain = NodePath("../UtilityAiBrain")
 
 [node name="UtilityAiBrain" type="Node" parent="." unique_id=1090293119]
 unique_name_in_owner = true

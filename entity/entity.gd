@@ -4,6 +4,8 @@ class_name Entity
 @onready var state_machine: StateMachine = %StateMachine
 @onready var entity_sprite: Sprite2D = %EntitySprite
 @onready var brain: UtilityAiBrain = %UtilityAiBrain
+@onready var task_runner: TaskRunner = %TaskRunner
+
 
 
 @export var speed := 80.0
@@ -31,7 +33,6 @@ var destination_target: Interactable = null
 var held_item: String = ""
 var held_amount := 0
 
-var action_step := 0
 
 
 func is_holding_item() -> bool:
@@ -53,59 +54,103 @@ func _on_top_action_changed(action_id: String) -> void:
 
 	match action_id:
 		"eat":
-			target = WorldState.get_closest_available_target("storage", global_position, self)
-			if target == null:
-				current_action = "idle"
-				perform_action()
-				return
-			current_action = action_id
-			perform_action()
+			commit_eat()
 
 		"sleep":
-			target = WorldState.get_closest_available_target("energy_source", global_position, self)
-			if target == null:
-				current_action = "idle"
-				perform_action()
-				return
-			target.reserve(self)
-			current_action = action_id
-			perform_action()
-		
+			commit_sleep()
+
 		"gather_food":
-			source_target = WorldState.get_closest_available_target("food_source", global_position, self)
-			destination_target = WorldState.get_closest_available_target("storage", global_position, self)
-
-			if source_target == null or destination_target == null:
-				current_action = "idle"
-				perform_action()
-				return
-
-			source_target.reserve(self)
-
-			target = source_target
-			action_step = 0
-			current_action = action_id
-			perform_action()
-
+			commit_gather_food()
 
 		"idle":
-			if target:
-				target.release(self)
-				target = null
+			commit_idle()
 
-			current_action = action_id
-			perform_action()
+func commit_sleep() -> void:
+	var bed := WorldState.get_closest_available_target("energy_source", global_position, self)
 
-
-
-func perform_action() -> void:
-	if current_action == "idle" or target == null:
+	if bed == null:
+		current_action = "idle"
 		state_machine.change_state("idle")
 		return
 
-	is_busy = true
-	state_machine.change_state("DoAction")
+	bed.reserve(self)
+	target = bed
 
+	task_runner.set_tasks([
+		MoveToTask.new(bed),
+		InteractTask.new(bed),
+	])
+
+	current_action = "sleep"
+	is_busy = true
+	state_machine.change_state("ExecuteTaskSequence")
+
+
+func commit_eat() -> void:
+	var storage := WorldState.get_closest_available_target("storage", global_position, self)
+
+	if storage == null:
+		current_action = "idle"
+		state_machine.change_state("idle")
+		return
+
+	target = storage
+
+	task_runner.set_tasks([
+		MoveToTask.new(storage),
+		InteractTask.new(storage),
+	])
+
+	current_action = "eat"
+	is_busy = true
+	state_machine.change_state("ExecuteTaskSequence")
+
+func commit_gather_food() -> void:
+	var source := WorldState.get_closest_available_target("food_source", global_position, self)
+	var destination := WorldState.get_closest_available_target("storage", global_position, self)
+
+	if source == null or destination == null:
+		current_action = "idle"
+		state_machine.change_state("idle")
+		return
+
+	source.reserve(self)
+	#destination reservation on storage is currently not something i want since its can be shared and used at the same time
+	#destination.reserve(self)#
+
+	source_target = source
+	destination_target = destination
+
+	task_runner.set_tasks([
+		MoveToTask.new(source),
+		InteractTask.new(source),
+		MoveToTask.new(destination),
+		InteractTask.new(destination),
+	])
+
+	current_action = "gather_food"
+	is_busy = true
+	state_machine.change_state("ExecuteTaskSequence")
+
+func commit_idle() -> void:
+	if target:
+		target.release(self)
+
+	if source_target:
+		source_target.release(self)
+
+	if destination_target:
+		destination_target.release(self)
+
+	task_runner.clear()
+
+	target = null
+	source_target = null
+	destination_target = null
+
+	current_action = "idle"
+	is_busy = false
+	state_machine.change_state("idle")
 
 func _process(delta: float) -> void:
 	decay_needs(delta)
@@ -126,6 +171,8 @@ func decay_needs(delta: float) -> void:
 
 
 func finish_action() -> void:
+	task_runner.clear()
+
 	if target:
 		target.release(self)
 
@@ -138,7 +185,6 @@ func finish_action() -> void:
 	target = null
 	source_target = null
 	destination_target = null
-	action_step = 0
 
 	current_action = "idle"
 	is_busy = false
