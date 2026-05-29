@@ -9,7 +9,8 @@ func interact(entity: Entity) -> void:
 
 	print(entity, " is gathering food from Bush")
 
-	WorldState.storage["food"] += 1
+	entity.held_item = "food"
+	entity.held_amount = 1
 
 	useable = false
 	start_respawn()

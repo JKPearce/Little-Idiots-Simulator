@@ -79,9 +79,10 @@ _data = {
 &"grow": SubResource("Animation_xw17e")
 }
 
-[node name="Bush" type="Node2D" unique_id=891918958 groups=["food"]]
+[node name="Bush" type="Node2D" unique_id=891918958 groups=["food_source"]]
 script = ExtResource("1_28u5p")
-target_group = "hunger"
+target_group = "food_source"
+interaction_distance = 8.0
 
 [node name="Circle" type="Sprite2D" parent="." unique_id=10166365]
 modulate = Color(0.08529731, 0.5098177, 0.19188786, 1)

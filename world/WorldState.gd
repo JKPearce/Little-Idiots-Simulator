@@ -1,8 +1,8 @@
 extends Node
 
 var interactable_target_nodes := {
-	"hunger": [],
-	"energy": [],
+	"food_source": [],
+	"energy_source": [],
 	"storage" : [],
 }
 

@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://b645iqa86lhdi" path="res://world/interactables/energy/bed.gd" id="1_c32mu"]
 [ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_2rykw"]
 
-[node name="Bed" type="Node2D" unique_id=1288856914 groups=["energy"]]
+[node name="Bed" type="Node2D" unique_id=1288856914 groups=["energy_source"]]
 script = ExtResource("1_c32mu")
-target_group = "energy"
+target_group = "energy_source"
 quality = 0.8
+interaction_distance = 8.0
 
 [node name="Circle" type="Sprite2D" parent="." unique_id=202492710]
 modulate = Color(0.35623822, 0.17648593, 0, 1)

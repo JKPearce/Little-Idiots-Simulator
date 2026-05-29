@@ -6,6 +6,8 @@ class_name Interactable
 @export var useable:= true
 
 var reserved_by: Entity = null
+@export var requires_reservation := true
+@export var interaction_distance := 24.0
 
 func _ready() -> void:
 	if target_group == "":
@@ -30,7 +32,7 @@ func is_available_for(entity: Entity) -> bool:
 	if not useable:
 		return false
 
-	if reserved_by != null and reserved_by != entity:
+	if requires_reservation and reserved_by != null and reserved_by != entity:
 		return false
 
 	return true

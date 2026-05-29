@@ -27,22 +27,22 @@ energy_decay_rate = 0.1
 [node name="World" type="Node2D" parent="." unique_id=1484823229]
 unique_name_in_owner = true
 
-[node name="Bed" parent="World" unique_id=1288856914 instance=ExtResource("2_h2yge")]
+[node name="Bed" parent="World" unique_id=1288856914 groups=["energy_source"] instance=ExtResource("2_h2yge")]
 position = Vector2(1002, 89)
 
-[node name="Bed2" parent="World" unique_id=532419798 instance=ExtResource("2_h2yge")]
+[node name="Bed2" parent="World" unique_id=532419798 groups=["energy_source"] instance=ExtResource("2_h2yge")]
 position = Vector2(535, 439)
 
-[node name="Bed3" parent="World" unique_id=325263823 instance=ExtResource("2_h2yge")]
+[node name="Bed3" parent="World" unique_id=325263823 groups=["energy_source"] instance=ExtResource("2_h2yge")]
 position = Vector2(233, 114)
 
-[node name="Bush" parent="World" unique_id=891918958 instance=ExtResource("3_1bvp3")]
+[node name="Bush" parent="World" unique_id=891918958 groups=["food_source"] instance=ExtResource("3_1bvp3")]
 position = Vector2(478, 111)
 
-[node name="Bush2" parent="World" unique_id=1268340270 instance=ExtResource("3_1bvp3")]
+[node name="Bush2" parent="World" unique_id=1268340270 groups=["food_source"] instance=ExtResource("3_1bvp3")]
 position = Vector2(759, 347)
 
-[node name="Bush3" parent="World" unique_id=60905528 instance=ExtResource("3_1bvp3")]
+[node name="Bush3" parent="World" unique_id=60905528 groups=["food_source"] instance=ExtResource("3_1bvp3")]
 position = Vector2(267, 483)
 
 [node name="Storage" parent="." unique_id=1852298509 instance=ExtResource("4_1bvp3")]

@@ -6,6 +6,8 @@
 [node name="Storage" type="Node2D" unique_id=1852298509]
 script = ExtResource("1_5i5pv")
 target_group = "storage"
+requires_reservation = false
+interaction_distance = 34.0
 
 [node name="Circle" type="Sprite2D" parent="." unique_id=1569779951]
 scale = Vector2(0.5, 0.5)

@@ -25,8 +25,8 @@ window/size/viewport_height=1080
 
 [global_group]
 
-food="food sources"
-energy="energy sources"
+food_source="food sources"
+energy_source="energy sources"
 
 [physics]
 

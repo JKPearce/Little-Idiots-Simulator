@@ -25,12 +25,28 @@ var needs:= {
 var current_action = null
 var is_busy:= false
 var target: Interactable = null
+var source_target: Interactable = null
+var destination_target: Interactable = null
+
+var held_item: String = ""
+var held_amount := 0
+
+var action_step := 0
+
+
+func is_holding_item() -> bool:
+	return held_item != "" and held_amount > 0
+
+
+func clear_held_item() -> void:
+	held_item = ""
+	held_amount = 0
 
 
 func _ready() -> void:
 	brain.top_action_changed.connect(_on_top_action_changed)
 
-
+#make it work, make it ugly - this functions mantra lol
 func _on_top_action_changed(action_id: String) -> void:
 	if is_busy:
 		return
@@ -46,7 +62,7 @@ func _on_top_action_changed(action_id: String) -> void:
 			perform_action()
 
 		"sleep":
-			target = WorldState.get_closest_available_target("energy", global_position, self)
+			target = WorldState.get_closest_available_target("energy_source", global_position, self)
 			if target == null:
 				current_action = "idle"
 				perform_action()
@@ -56,12 +72,18 @@ func _on_top_action_changed(action_id: String) -> void:
 			perform_action()
 		
 		"gather_food":
-			target = WorldState.get_closest_available_target("hunger", global_position, self)
-			if target == null:
+			source_target = WorldState.get_closest_available_target("food_source", global_position, self)
+			destination_target = WorldState.get_closest_available_target("storage", global_position, self)
+
+			if source_target == null or destination_target == null:
 				current_action = "idle"
 				perform_action()
 				return
-			target.reserve(self)
+
+			source_target.reserve(self)
+
+			target = source_target
+			action_step = 0
 			current_action = action_id
 			perform_action()
 
@@ -106,7 +128,17 @@ func decay_needs(delta: float) -> void:
 func finish_action() -> void:
 	if target:
 		target.release(self)
-		target = null
+
+	if source_target:
+		source_target.release(self)
+
+	if destination_target:
+		destination_target.release(self)
+
+	target = null
+	source_target = null
+	destination_target = null
+	action_step = 0
 
 	current_action = "idle"
 	is_busy = false
