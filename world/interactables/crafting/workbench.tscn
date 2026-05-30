@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8re1njrc2oue"]
+
+[ext_resource type="Script" uid="uid://bfu1ow6vgbn6c" path="res://world/interactables/crafting/workbench.gd" id="1_36qjx"]
+[ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="1_cche4"]
+
+[node name="Workbench" type="Node2D" unique_id=1331503441 groups=["crafting"]]
+script = ExtResource("1_36qjx")
+target_group = "crafting"
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=302980415]
+texture = ExtResource("1_cche4")
+
+[node name="Label" type="Label" parent="." unique_id=105956997]
+offset_left = -42.0
+offset_top = 29.0
+offset_right = 47.0
+offset_bottom = 52.0
+text = "Workbench"

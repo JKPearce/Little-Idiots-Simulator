@@ -6,6 +6,7 @@ var interactable_target_nodes := {
 	"wood_source": [],
 	"stone_source": [],
 	"storage" : [],
+	"crafting": [],
 }
 
 var storage :={

@@ -5,9 +5,10 @@ class_name Entity
 @onready var brain: UtilityAiBrain = %UtilityAiBrain
 @onready var task_runner: TaskRunner = %TaskRunner
 @onready var visuals: EntityVisuals = $EntityVisuals
+@onready var debug_overlay: Control = $DebugOverlay
 
 
-
+@export var debug_enabled:= true
 @export var speed := 80.0
 
 enum NEED {
@@ -45,12 +46,9 @@ func clear_held_item() -> void:
 
 
 func _ready() -> void:
-	print("Visuals: ", visuals)
-	print("Visuals sprite: ", visuals.sprite if visuals else null)
-	print("Visuals anim: ", visuals.animation_player if visuals else null)
+	debug_overlay.debug_enabled = debug_enabled
 	brain.top_action_changed.connect(_on_top_action_changed)
 
-#make it work, make it ugly - this functions mantra lol
 func _on_top_action_changed(action_id: String) -> void:
 	if is_busy:
 		return
@@ -71,15 +69,37 @@ func _on_top_action_changed(action_id: String) -> void:
 		"gather_stone":
 			commit_gather_resource("gather_stone", "stone_source")
 
+		"craft_tool":
+			commit_craft_tool()
+	
 		"idle":
 			commit_idle()
+
+func commit_craft_tool() -> void:
+	var workbench := WorldState.get_closest_available_target("crafting", global_position, self)
+
+	if workbench == null:
+		commit_idle()
+		return
+
+	workbench.reserve(self)
+	target = workbench
+
+	task_runner.set_tasks([
+		MoveToTask.new(workbench),
+		WaitTask.new(3.0, "craft"),
+		InteractTask.new(workbench),
+	])
+
+	current_action = "craft_tool"
+	is_busy = true
+	state_machine.change_state("ExecuteTaskSequence")
 
 func commit_sleep() -> void:
 	var bed := WorldState.get_closest_available_target("energy_source", global_position, self)
 
 	if bed == null:
-		current_action = "idle"
-		state_machine.change_state("idle")
+		commit_idle()
 		return
 
 	bed.reserve(self)
@@ -87,6 +107,7 @@ func commit_sleep() -> void:
 
 	task_runner.set_tasks([
 		MoveToTask.new(bed),
+		WaitTask.new(3.0, "craft"),
 		InteractTask.new(bed),
 	])
 
@@ -99,14 +120,14 @@ func commit_eat() -> void:
 	var storage := WorldState.get_closest_available_target("storage", global_position, self)
 
 	if storage == null:
-		current_action = "idle"
-		state_machine.change_state("idle")
+		commit_idle()
 		return
 
 	target = storage
 
 	task_runner.set_tasks([
 		MoveToTask.new(storage),
+		WaitTask.new(1.0, "craft"),
 		InteractTask.new(storage),
 	])
 
@@ -129,6 +150,7 @@ func commit_gather_resource(action_id: String, source_group: String) -> void:
 
 	task_runner.set_tasks([
 		MoveToTask.new(source),
+		WaitTask.new(1.5, "gather"),
 		InteractTask.new(source),
 		MoveToTask.new(destination),
 		InteractTask.new(destination),

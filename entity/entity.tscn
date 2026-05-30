@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cow05xj0frosc" path="res://entity/ai/utility/considerations/storage_has_item_consideration.gd" id="12_pkawc"]
 [ext_resource type="Script" uid="uid://c0eubyctdiemc" path="res://entity/ai/utility/considerations/node_available_consideration.gd" id="12_psl4n"]
 [ext_resource type="Script" uid="uid://cw3oscjihnmub" path="res://entity/ai/utility/considerations/energy_consideration.gd" id="12_qs5px"]
+[ext_resource type="Curve" uid="uid://j2dhr7whjnmu" path="res://entity/ai/utility/curves/distance_curve.tres" id="13_lkwko"]
 [ext_resource type="Script" uid="uid://oiksqf1xsn5q" path="res://entity/ai/utility/considerations/storage_shortage_consideration.gd" id="15_k6a8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uqc13"]
@@ -25,8 +26,8 @@ custom_solver_bias = 0.8
 _data = [Vector2(0.0046729, 0), 0.0, 0.0, 0, 0, Vector2(0.34579438, 0), 0.0, 0.0, 0, 0, Vector2(0.65420556, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="Curve" id="Curve_f6k7f"]
-_data = [Vector2(0.24766356, 0.30337083), 0.0, 0.13115422, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_0ly1k"]
+_data = [Vector2(0, 0.79775286), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_qs5px"]
@@ -42,8 +43,8 @@ _data = [Vector2(0, 0.011235952), 0.0, 0.0, 0, 0, Vector2(1, 0.011235952), 0.0, 
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_ll4h2"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25233644, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.49999997, 0.75280905), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_lkwko"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -53,11 +54,23 @@ point_count = 2
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.46728972, 0.6966293), 0.64986324, 0.64986324, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Curve" id="Curve_0ly1k"]
-_data = [Vector2(0.24766356, 0.30337083), 0.0, 0.13115422, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_7tnic"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_7tnic"]
+[sub_resource type="Curve" id="Curve_xq5i5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fulai"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_owyq6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qabon"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -115,7 +128,7 @@ curve = SubResource("Curve_pkawc")
 script = ExtResource("11_f6k7f")
 target_group = "hunger"
 entity = NodePath("../../../..")
-curve = SubResource("Curve_f6k7f")
+curve = SubResource("Curve_0ly1k")
 
 [node name="StorageHasItemConsideration" type="Node" parent="UtilityAiBrain/eat/Aggregation" unique_id=1085826760]
 script = ExtResource("12_pkawc")
@@ -138,7 +151,7 @@ curve = SubResource("Curve_k6a8k")
 script = ExtResource("11_f6k7f")
 target_group = "energy_source"
 entity = NodePath("../../../..")
-curve = SubResource("Curve_f6k7f")
+curve = ExtResource("13_lkwko")
 
 [node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/sleep/Aggregation" unique_id=757720551 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
@@ -171,7 +184,7 @@ curve = SubResource("Curve_ll4h2")
 script = ExtResource("11_f6k7f")
 target_group = "food_source"
 entity = NodePath("../../../..")
-curve = SubResource("Curve_f6k7f")
+curve = ExtResource("13_lkwko")
 
 [node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_food/Aggregation" unique_id=1212233959 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
@@ -188,7 +201,7 @@ script = ExtResource("10_wrmdn")
 [node name="StorageShortageConsideration" type="Node" parent="UtilityAiBrain/gather_wood/Aggregation" unique_id=710073659]
 script = ExtResource("15_k6a8k")
 storage_key = "wood"
-min_desired_amount = 10.0
+min_desired_amount = 1.0
 max_desired_amount = 20.0
 requires_entity = false
 curve = SubResource("Curve_im6w5")
@@ -197,7 +210,7 @@ curve = SubResource("Curve_im6w5")
 script = ExtResource("11_f6k7f")
 target_group = "wood_source"
 entity = NodePath("../../../..")
-curve = SubResource("Curve_0ly1k")
+curve = ExtResource("13_lkwko")
 
 [node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_wood/Aggregation" unique_id=1250600135 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
@@ -214,7 +227,7 @@ script = ExtResource("10_wrmdn")
 [node name="StorageShortageConsideration" type="Node" parent="UtilityAiBrain/gather_stone/Aggregation" unique_id=695474550]
 script = ExtResource("15_k6a8k")
 storage_key = "stone"
-min_desired_amount = 10.0
+min_desired_amount = 1.0
 max_desired_amount = 20.0
 requires_entity = false
 curve = SubResource("Curve_im6w5")
@@ -223,10 +236,40 @@ curve = SubResource("Curve_im6w5")
 script = ExtResource("11_f6k7f")
 target_group = "stone_source"
 entity = NodePath("../../../..")
-curve = SubResource("Curve_0ly1k")
+curve = ExtResource("13_lkwko")
 
 [node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_stone/Aggregation" unique_id=547506155 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
 target_group = "stone_source"
 entity = NodePath("../../../..")
 curve = SubResource("Curve_7tnic")
+
+[node name="craft_tool" type="Node" parent="UtilityAiBrain" unique_id=28455828]
+script = ExtResource("8_whxwk")
+
+[node name="Aggregation" type="Node" parent="UtilityAiBrain/craft_tool" unique_id=2143042742]
+script = ExtResource("10_wrmdn")
+
+[node name="StoneStorageConsideration" type="Node" parent="UtilityAiBrain/craft_tool/Aggregation" unique_id=1687043045]
+script = ExtResource("12_pkawc")
+storage_key = "stone"
+requires_entity = false
+curve = SubResource("Curve_xq5i5")
+
+[node name="WoodStorageConsideration" type="Node" parent="UtilityAiBrain/craft_tool/Aggregation" unique_id=789463530]
+script = ExtResource("12_pkawc")
+storage_key = "wood"
+requires_entity = false
+curve = SubResource("Curve_fulai")
+
+[node name="BenchAvailableConsideration" type="Node" parent="UtilityAiBrain/craft_tool/Aggregation" unique_id=337568739 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_psl4n")
+target_group = "crafting"
+entity = NodePath("../../../..")
+curve = SubResource("Curve_owyq6")
+
+[node name="StorageShortageConsideration" type="Node" parent="UtilityAiBrain/craft_tool/Aggregation" unique_id=941918748]
+script = ExtResource("15_k6a8k")
+storage_key = "tool"
+requires_entity = false
+curve = SubResource("Curve_qabon")

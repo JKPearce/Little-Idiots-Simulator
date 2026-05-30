@@ -3,12 +3,12 @@ extends Control
 @export var entity: Entity
 @export var utility_brain: UtilityAiBrain
 
-@export var debug_enabled:= true
 
 @onready var current_action_overlay: Label = %CurrentActionOverlay
 @onready var stat_container: VBoxContainer = %StatContainer
 @onready var action_score_container: VBoxContainer = %ActionScoreContainer
 
+var debug_enabled:= true
 
 var stat_labels := {}
 var action_score_labels := {}

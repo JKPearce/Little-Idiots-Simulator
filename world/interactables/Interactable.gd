@@ -39,6 +39,9 @@ func is_available_for(entity: Entity) -> bool:
 	return true
 
 func reserve(entity: Entity) -> void:
+	if not requires_reservation:
+		return
+
 	reserved_by = entity
 
 func release(entity: Entity) -> void:

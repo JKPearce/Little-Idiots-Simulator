@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtb83abm68myj"]
 
 [ext_resource type="PackedScene" uid="uid://d1wxee1h5fkm3" path="res://entity/entity.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://8re1njrc2oue" path="res://world/interactables/crafting/workbench.tscn" id="2_272bh"]
 [ext_resource type="PackedScene" uid="uid://bnv5pr5h4miei" path="res://world/interactables/energy/bed.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b88wbf80qel17" path="res://world/interactables/storage/storage.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cu7fujewljegi" path="res://world/interactables/wood/forest.tscn" id="4_lquwl"]
@@ -14,20 +15,18 @@ position = Vector2(220, 295)
 
 [node name="Entity2" parent="." unique_id=1437914156 instance=ExtResource("1_ig7tw")]
 position = Vector2(406, 318)
-hunger_decay_rate = 0.05
 
 [node name="Entity3" parent="." unique_id=2112537551 instance=ExtResource("1_ig7tw")]
 position = Vector2(547, 329)
-hunger_decay_rate = 0.05
-energy_decay_rate = 0.05
 
 [node name="Entity4" parent="." unique_id=187959413 instance=ExtResource("1_ig7tw")]
 position = Vector2(774, 295)
-hunger_decay_rate = 0.01
-energy_decay_rate = 0.1
 
 [node name="World" type="Node2D" parent="." unique_id=1484823229]
 unique_name_in_owner = true
+
+[node name="Workbench" parent="World" unique_id=1331503441 instance=ExtResource("2_272bh")]
+position = Vector2(143, 479)
 
 [node name="Bed" parent="World" unique_id=1288856914 instance=ExtResource("2_h2yge")]
 position = Vector2(722, 105)

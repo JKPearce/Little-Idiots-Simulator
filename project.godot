@@ -29,6 +29,7 @@ food_source="food sources"
 energy_source="energy sources"
 wood_source="A place where you can get wood"
 stone_source="a source of stones"
+crafting="nodes where crafting happens"
 
 [layer_names]
 
