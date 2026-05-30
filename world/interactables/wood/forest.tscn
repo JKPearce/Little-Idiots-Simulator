@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cu7fujewljegi"]
+
+[ext_resource type="PackedScene" uid="uid://brgr03oiko15a" path="res://world/interactables/wood/tree.tscn" id="1_ljamu"]
+
+[node name="Forest" type="Node2D" unique_id=1023373357]
+
+[node name="Tree" parent="." unique_id=1079727346 instance=ExtResource("1_ljamu")]
+
+[node name="Tree2" parent="." unique_id=1079364268 instance=ExtResource("1_ljamu")]
+position = Vector2(18, -9)
+
+[node name="Tree3" parent="." unique_id=1585780942 instance=ExtResource("1_ljamu")]
+position = Vector2(0, -25)
+
+[node name="Tree4" parent="." unique_id=1925313209 instance=ExtResource("1_ljamu")]
+position = Vector2(-25, -18)
+
+[node name="Tree5" parent="." unique_id=1390568031 instance=ExtResource("1_ljamu")]
+position = Vector2(-26, 8)
+
+[node name="Tree6" parent="." unique_id=881865021 instance=ExtResource("1_ljamu")]
+position = Vector2(-4, 31)
+
+[node name="Tree7" parent="." unique_id=1931728758 instance=ExtResource("1_ljamu")]
+position = Vector2(26, 27)
+
+[node name="Tree8" parent="." unique_id=980014965 instance=ExtResource("1_ljamu")]
+position = Vector2(38, 15)
+
+[node name="Tree9" parent="." unique_id=1196301214 instance=ExtResource("1_ljamu")]
+position = Vector2(47, -2)
+
+[node name="Tree10" parent="." unique_id=1250118660 instance=ExtResource("1_ljamu")]
+position = Vector2(50, -20)
+
+[node name="Tree11" parent="." unique_id=2132538991 instance=ExtResource("1_ljamu")]
+position = Vector2(38, -29)
+
+[node name="Tree12" parent="." unique_id=1285379054 instance=ExtResource("1_ljamu")]
+position = Vector2(26, -38)
+
+[node name="Tree13" parent="." unique_id=506989995 instance=ExtResource("1_ljamu")]
+position = Vector2(12, -51)
+
+[node name="Tree14" parent="." unique_id=260756564 instance=ExtResource("1_ljamu")]
+position = Vector2(-12, -52)
+
+[node name="Tree15" parent="." unique_id=38192062 instance=ExtResource("1_ljamu")]
+position = Vector2(-28, -46)
+
+[node name="Tree16" parent="." unique_id=873121988 instance=ExtResource("1_ljamu")]
+position = Vector2(-49, -33)
+
+[node name="Tree17" parent="." unique_id=1464082134 instance=ExtResource("1_ljamu")]
+position = Vector2(-52, -14)
+
+[node name="Tree18" parent="." unique_id=722550109 instance=ExtResource("1_ljamu")]
+position = Vector2(-54, 2)
+
+[node name="Tree19" parent="." unique_id=865229388 instance=ExtResource("1_ljamu")]
+position = Vector2(-52, 24)
+
+[node name="Tree20" parent="." unique_id=1587679947 instance=ExtResource("1_ljamu")]
+position = Vector2(-45, 44)
+
+[node name="Tree21" parent="." unique_id=791676421 instance=ExtResource("1_ljamu")]
+position = Vector2(-26, 39)
+
+[node name="Tree22" parent="." unique_id=1608559098 instance=ExtResource("1_ljamu")]
+position = Vector2(8, 12)
+
+[node name="Tree23" parent="." unique_id=1566335552 instance=ExtResource("1_ljamu")]
+position = Vector2(1, 50)

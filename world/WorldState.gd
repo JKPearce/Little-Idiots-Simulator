@@ -3,12 +3,15 @@ extends Node
 var interactable_target_nodes := {
 	"food_source": [],
 	"energy_source": [],
+	"wood_source": [],
+	"stone_source": [],
 	"storage" : [],
 }
 
 var storage :={
 	"food" : 0,
-	"wood" : 0 
+	"wood" : 0,
+	"stone" : 0,
 }
 
 

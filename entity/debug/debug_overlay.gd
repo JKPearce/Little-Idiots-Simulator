@@ -14,8 +14,9 @@ var stat_labels := {}
 var action_score_labels := {}
 
 func _ready() -> void:
-	create_stat_labels()
-	create_action_score_labels()
+	if debug_enabled:
+		create_stat_labels()
+		create_action_score_labels()
 
 
 func create_stat_labels() -> void:
@@ -40,9 +41,10 @@ func create_action_score_labels() -> void:
 
 
 func _process(_delta: float) -> void:
-	update_current_action()
-	update_stats()
-	update_action_scores()
+	if debug_enabled:
+		update_current_action()
+		update_stats()
+		update_action_scores()
 
 
 func update_current_action() -> void:

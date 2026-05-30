@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dxy8qjajj7nyv"]
+
+[ext_resource type="PackedScene" uid="uid://dql2uwose0qlk" path="res://world/interactables/food/bush.tscn" id="1_v6qcd"]
+
+[node name="BushPatch" type="Node2D" unique_id=580064098]
+
+[node name="Bush" parent="." unique_id=891918958 instance=ExtResource("1_v6qcd")]
+
+[node name="Bush2" parent="." unique_id=1474476321 instance=ExtResource("1_v6qcd")]
+position = Vector2(18, -19)
+
+[node name="Bush3" parent="." unique_id=1440101544 instance=ExtResource("1_v6qcd")]
+position = Vector2(-7, -28)
+
+[node name="Bush4" parent="." unique_id=2128756686 instance=ExtResource("1_v6qcd")]
+position = Vector2(-36, -13)
+
+[node name="Bush5" parent="." unique_id=1562794345 instance=ExtResource("1_v6qcd")]
+position = Vector2(-32, 20)
+
+[node name="Bush6" parent="." unique_id=1086555296 instance=ExtResource("1_v6qcd")]
+position = Vector2(6, 39)
+
+[node name="Bush7" parent="." unique_id=259314849 instance=ExtResource("1_v6qcd")]
+position = Vector2(38, 27)
+
+[node name="Bush8" parent="." unique_id=1486334365 instance=ExtResource("1_v6qcd")]
+position = Vector2(52, -1)
+
+[node name="Bush9" parent="." unique_id=178467457 instance=ExtResource("1_v6qcd")]
+position = Vector2(22, -51)

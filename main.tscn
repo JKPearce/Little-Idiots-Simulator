@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d1wxee1h5fkm3" path="res://entity/entity.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bnv5pr5h4miei" path="res://world/interactables/energy/bed.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dql2uwose0qlk" path="res://world/interactables/hunger/bush.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b88wbf80qel17" path="res://world/interactables/storage/storage.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cu7fujewljegi" path="res://world/interactables/wood/forest.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dxy8qjajj7nyv" path="res://world/interactables/food/bush_patch.tscn" id="5_7mycd"]
 
 [node name="Main" type="Node2D" unique_id=2144949237]
 
@@ -11,39 +12,45 @@
 position = Vector2(220, 295)
 
 [node name="Entity2" parent="." unique_id=1437914156 instance=ExtResource("1_ig7tw")]
-position = Vector2(453, 570)
+position = Vector2(406, 318)
 hunger_decay_rate = 0.05
 
 [node name="Entity3" parent="." unique_id=2112537551 instance=ExtResource("1_ig7tw")]
-position = Vector2(932, 484)
+position = Vector2(547, 329)
 hunger_decay_rate = 0.05
 energy_decay_rate = 0.05
 
 [node name="Entity4" parent="." unique_id=187959413 instance=ExtResource("1_ig7tw")]
-position = Vector2(824, 241)
+position = Vector2(774, 295)
 hunger_decay_rate = 0.01
 energy_decay_rate = 0.1
 
 [node name="World" type="Node2D" parent="." unique_id=1484823229]
 unique_name_in_owner = true
 
-[node name="Bed" parent="World" unique_id=1288856914 groups=["energy_source"] instance=ExtResource("2_h2yge")]
-position = Vector2(1002, 89)
+[node name="Bed" parent="World" unique_id=1288856914 instance=ExtResource("2_h2yge")]
+position = Vector2(722, 105)
 
-[node name="Bed2" parent="World" unique_id=532419798 groups=["energy_source"] instance=ExtResource("2_h2yge")]
-position = Vector2(535, 439)
+[node name="Bed2" parent="World" unique_id=532419798 instance=ExtResource("2_h2yge")]
+position = Vector2(532, 104)
 
-[node name="Bed3" parent="World" unique_id=325263823 groups=["energy_source"] instance=ExtResource("2_h2yge")]
-position = Vector2(233, 114)
+[node name="Bed3" parent="World" unique_id=325263823 instance=ExtResource("2_h2yge")]
+position = Vector2(387, 102)
 
-[node name="Bush" parent="World" unique_id=891918958 groups=["food_source"] instance=ExtResource("3_1bvp3")]
-position = Vector2(478, 111)
+[node name="Storage" parent="World" unique_id=1852298509 instance=ExtResource("4_1bvp3")]
+position = Vector2(462, 592)
 
-[node name="Bush2" parent="World" unique_id=1268340270 groups=["food_source"] instance=ExtResource("3_1bvp3")]
-position = Vector2(759, 347)
+[node name="Forest" parent="World" unique_id=1023373357 instance=ExtResource("4_lquwl")]
+position = Vector2(1290, 206)
 
-[node name="Bush3" parent="World" unique_id=60905528 groups=["food_source"] instance=ExtResource("3_1bvp3")]
-position = Vector2(267, 483)
+[node name="Forest2" parent="World" unique_id=151957969 instance=ExtResource("4_lquwl")]
+position = Vector2(1302, 430)
 
-[node name="Storage" parent="." unique_id=1852298509 instance=ExtResource("4_1bvp3")]
-position = Vector2(648, 617)
+[node name="Forest3" parent="World" unique_id=1439901263 instance=ExtResource("4_lquwl")]
+position = Vector2(1063, 746)
+
+[node name="BushPatch" parent="." unique_id=580064098 instance=ExtResource("5_7mycd")]
+position = Vector2(175, 792)
+
+[node name="BushPatch2" parent="." unique_id=842058975 instance=ExtResource("5_7mycd")]
+position = Vector2(1669, 727)

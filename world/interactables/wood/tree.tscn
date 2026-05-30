@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://brgr03oiko15a"]
+
+[ext_resource type="Script" uid="uid://toxv4ub0lfnl" path="res://world/interactables/wood/tree.gd" id="1_kgcnh"]
+[ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_0hlva"]
+
+[node name="Tree" type="Node2D" unique_id=1079727346 groups=["wood_source"]]
+script = ExtResource("1_kgcnh")
+target_group = "wood_source"
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=1263085352]
+modulate = Color(0.4997828, 0.5225627, 1.92523e-07, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_0hlva")

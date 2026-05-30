@@ -2,13 +2,14 @@ extends Interactable
 class_name Storage
 
 func interact(entity: Entity) -> void:
-	#entity is depositing food
 	if entity.is_holding_item():
-		WorldState.storage[entity.held_item] += entity.held_amount
+		var item := entity.held_item
+		var amount := entity.held_amount
+
+		WorldState.storage[item] = WorldState.storage.get(item, 0) + amount
 		entity.clear_held_item()
 		return
 	
-	#entity is eating food
 	if WorldState.storage.get("food", 0) <= 0:
 		return
 
@@ -21,4 +22,9 @@ func interact(entity: Entity) -> void:
 	)
 
 func _process(delta: float) -> void:
-	%Storage.text = "Food: " + str(WorldState.storage["food"])
+	var lines := []
+
+	for item in WorldState.storage:
+		lines.append("%s: %s" % [item.capitalize(), WorldState.storage[item]])
+
+	%Storage.text = "\n".join(lines)

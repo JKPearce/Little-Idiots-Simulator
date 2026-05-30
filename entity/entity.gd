@@ -63,7 +63,10 @@ func _on_top_action_changed(action_id: String) -> void:
 			commit_sleep()
 
 		"gather_food":
-			commit_gather_food()
+			commit_gather_resource("gather_food", "food_source")
+			
+		"gather_wood":
+			commit_gather_resource("gather_wood", "wood_source")
 
 		"idle":
 			commit_idle()
@@ -108,18 +111,15 @@ func commit_eat() -> void:
 	is_busy = true
 	state_machine.change_state("ExecuteTaskSequence")
 
-func commit_gather_food() -> void:
-	var source := WorldState.get_closest_available_target("food_source", global_position, self)
+func commit_gather_resource(action_id: String, source_group: String) -> void:
+	var source := WorldState.get_closest_available_target(source_group, global_position, self)
 	var destination := WorldState.get_closest_available_target("storage", global_position, self)
 
 	if source == null or destination == null:
-		current_action = "idle"
-		state_machine.change_state("idle")
+		commit_idle()
 		return
 
 	source.reserve(self)
-	#destination reservation on storage is currently not something i want since its can be shared and used at the same time
-	#destination.reserve(self)#
 
 	source_target = source
 	destination_target = destination
@@ -131,9 +131,10 @@ func commit_gather_food() -> void:
 		InteractTask.new(destination),
 	])
 
-	current_action = "gather_food"
+	current_action = action_id
 	is_busy = true
 	state_machine.change_state("ExecuteTaskSequence")
+
 
 func commit_idle() -> void:
 	if target:

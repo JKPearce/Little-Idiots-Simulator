@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dql2uwose0qlk"]
 
-[ext_resource type="Script" uid="uid://b05uxo8xnkmou" path="res://world/interactables/hunger/bush.gd" id="1_28u5p"]
+[ext_resource type="Script" uid="uid://b05uxo8xnkmou" path="res://world/interactables/food/bush.gd" id="1_28u5p"]
 [ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_ilexf"]
 
 [sub_resource type="Animation" id="Animation_oelii"]
@@ -81,6 +81,7 @@ _data = {
 
 [node name="Bush" type="Node2D" unique_id=891918958 groups=["food_source"]]
 script = ExtResource("1_28u5p")
+respawn_time = 60.0
 target_group = "food_source"
 interaction_distance = 8.0
 
@@ -102,6 +103,7 @@ libraries/ = SubResource("AnimationLibrary_mgn1b")
 
 [node name="RespawnTimer" type="Timer" parent="." unique_id=798107380]
 unique_name_in_owner = true
+wait_time = 10.0
 one_shot = true
 
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
