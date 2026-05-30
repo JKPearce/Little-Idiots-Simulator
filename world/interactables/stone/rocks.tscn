@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://rclfb2qc80wi"]
+
+[ext_resource type="PackedScene" uid="uid://dacvfk8rn87de" path="res://world/interactables/stone/rock.tscn" id="1_7v7a0"]
+
+[node name="Rocks" type="Node2D" unique_id=1410201133]
+
+[node name="Rock" parent="." unique_id=2113749784 instance=ExtResource("1_7v7a0")]
+
+[node name="Rock2" parent="." unique_id=897077699 instance=ExtResource("1_7v7a0")]
+position = Vector2(4, -6)
+
+[node name="Rock3" parent="." unique_id=261293848 instance=ExtResource("1_7v7a0")]
+position = Vector2(-3, -7)
+
+[node name="Rock4" parent="." unique_id=1374172281 instance=ExtResource("1_7v7a0")]
+position = Vector2(-9, -4)
+
+[node name="Rock5" parent="." unique_id=1296294759 instance=ExtResource("1_7v7a0")]
+position = Vector2(-8, 2)
+
+[node name="Rock6" parent="." unique_id=3312917 instance=ExtResource("1_7v7a0")]
+position = Vector2(-3, 6)
+
+[node name="Rock7" parent="." unique_id=161219968 instance=ExtResource("1_7v7a0")]
+position = Vector2(3, 5)
+
+[node name="Rock8" parent="." unique_id=453327880 instance=ExtResource("1_7v7a0")]
+position = Vector2(8, 2)
+
+[node name="Rock9" parent="." unique_id=1097400488 instance=ExtResource("1_7v7a0")]
+position = Vector2(9, -3)
+
+[node name="Rock10" parent="." unique_id=1907897562 instance=ExtResource("1_7v7a0")]
+position = Vector2(2, -11)
+
+[node name="Rock11" parent="." unique_id=1213198938 instance=ExtResource("1_7v7a0")]
+position = Vector2(-8, -12)
+
+[node name="Rock12" parent="." unique_id=1710895987 instance=ExtResource("1_7v7a0")]
+position = Vector2(-14, -1)
+
+[node name="Rock13" parent="." unique_id=1847307617 instance=ExtResource("1_7v7a0")]
+position = Vector2(-11, 6)
+
+[node name="Rock14" parent="." unique_id=442814324 instance=ExtResource("1_7v7a0")]
+position = Vector2(-6, 12)
+
+[node name="Rock15" parent="." unique_id=1546057432 instance=ExtResource("1_7v7a0")]
+position = Vector2(2, 12)
+
+[node name="Rock16" parent="." unique_id=653312973 instance=ExtResource("1_7v7a0")]
+position = Vector2(2, 12)

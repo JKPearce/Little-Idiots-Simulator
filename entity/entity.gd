@@ -67,6 +67,9 @@ func _on_top_action_changed(action_id: String) -> void:
 			
 		"gather_wood":
 			commit_gather_resource("gather_wood", "wood_source")
+			
+		"gather_stone":
+			commit_gather_resource("gather_stone", "stone_source")
 
 		"idle":
 			commit_idle()

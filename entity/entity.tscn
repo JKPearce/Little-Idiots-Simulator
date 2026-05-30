@@ -62,7 +62,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Entity" type="CharacterBody2D" unique_id=1437914156]
-collision_mask = 0
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_uqc13")
 
@@ -73,7 +73,6 @@ offset_right = -25.0
 offset_bottom = 32.0
 entity = NodePath("..")
 utility_brain = NodePath("../UtilityAiBrain")
-debug_enabled = false
 
 [node name="EntityVisuals" parent="." unique_id=1212973015 instance=ExtResource("2_ll4h2")]
 
@@ -203,5 +202,31 @@ curve = SubResource("Curve_0ly1k")
 [node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_wood/Aggregation" unique_id=1250600135 node_paths=PackedStringArray("entity")]
 script = ExtResource("12_psl4n")
 target_group = "wood_source"
+entity = NodePath("../../../..")
+curve = SubResource("Curve_7tnic")
+
+[node name="gather_stone" type="Node" parent="UtilityAiBrain" unique_id=900767805]
+script = ExtResource("8_whxwk")
+
+[node name="Aggregation" type="Node" parent="UtilityAiBrain/gather_stone" unique_id=2143653319]
+script = ExtResource("10_wrmdn")
+
+[node name="StorageShortageConsideration" type="Node" parent="UtilityAiBrain/gather_stone/Aggregation" unique_id=695474550]
+script = ExtResource("15_k6a8k")
+storage_key = "stone"
+min_desired_amount = 10.0
+max_desired_amount = 20.0
+requires_entity = false
+curve = SubResource("Curve_im6w5")
+
+[node name="DistanceConsideration" type="Node" parent="UtilityAiBrain/gather_stone/Aggregation" unique_id=917809479 node_paths=PackedStringArray("entity")]
+script = ExtResource("11_f6k7f")
+target_group = "stone_source"
+entity = NodePath("../../../..")
+curve = SubResource("Curve_0ly1k")
+
+[node name="AvailabilityConsideration" type="Node" parent="UtilityAiBrain/gather_stone/Aggregation" unique_id=547506155 node_paths=PackedStringArray("entity")]
+script = ExtResource("12_psl4n")
+target_group = "stone_source"
 entity = NodePath("../../../..")
 curve = SubResource("Curve_7tnic")

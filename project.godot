@@ -28,6 +28,7 @@ window/size/viewport_height=1080
 food_source="food sources"
 energy_source="energy sources"
 wood_source="A place where you can get wood"
+stone_source="a source of stones"
 
 [layer_names]
 

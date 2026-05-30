@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dacvfk8rn87de"]
+
+[ext_resource type="Script" uid="uid://cfyjfcg1vb8d" path="res://world/interactables/stone/rock.gd" id="1_ql7op"]
+[ext_resource type="Texture2D" uid="uid://b88m1dlti8ktj" path="res://circle.png" id="2_x71tm"]
+
+[node name="Rock" type="Node2D" unique_id=2113749784 groups=["stone_source"]]
+script = ExtResource("1_ql7op")
+target_group = "stone_source"
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=1304385903]
+modulate = Color(0.5649617, 0.5649616, 0.5649616, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_x71tm")

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b88wbf80qel17" path="res://world/interactables/storage/storage.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cu7fujewljegi" path="res://world/interactables/wood/forest.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dxy8qjajj7nyv" path="res://world/interactables/food/bush_patch.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://rclfb2qc80wi" path="res://world/interactables/stone/rocks.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node2D" unique_id=2144949237]
 
@@ -49,8 +50,17 @@ position = Vector2(1302, 430)
 [node name="Forest3" parent="World" unique_id=1439901263 instance=ExtResource("4_lquwl")]
 position = Vector2(1063, 746)
 
-[node name="BushPatch" parent="." unique_id=580064098 instance=ExtResource("5_7mycd")]
+[node name="BushPatch" parent="World" unique_id=580064098 instance=ExtResource("5_7mycd")]
 position = Vector2(175, 792)
 
-[node name="BushPatch2" parent="." unique_id=842058975 instance=ExtResource("5_7mycd")]
+[node name="BushPatch2" parent="World" unique_id=842058975 instance=ExtResource("5_7mycd")]
 position = Vector2(1669, 727)
+
+[node name="Rocks" parent="World" unique_id=1410201133 instance=ExtResource("6_7mycd")]
+position = Vector2(655, 684)
+
+[node name="Rocks2" parent="World" unique_id=427241554 instance=ExtResource("6_7mycd")]
+position = Vector2(885, 466)
+
+[node name="Rocks3" parent="World" unique_id=615620262 instance=ExtResource("6_7mycd")]
+position = Vector2(697, 232)
